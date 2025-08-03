@@ -1,0 +1,7 @@
+server.host: "0.0.0.0"
+server.shutdownTimeout: "5s"
+elasticsearch.hosts: [ "http://elasticsearch:9200" ]
+monitoring.ui.container.elasticsearch.enabled: true
+# Mandatory to setup a fleet server
+xpack.encryptedSavedObjects:
+  encryptionKey: "cle-de-32-bytes-minimum-pour-le-chiffrage"
