@@ -1,0 +1,7 @@
+instances:
+   - name: fleet_docker
+     dns:
+       - fleet_docker
+       - localhost
+     ip:
+       - 127.0.0.1
