@@ -1,0 +1,286 @@
+services:
+  ###########################################################################
+  # This service is run once for cretin certificats
+  ###########################################################################
+  # Purpose of this container, which is run only when the cluster is created,
+  # is to create the self signed certificat required by the installation. 
+  setup:
+    image: docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
+    volumes:
+      - ./certs:/usr/share/elasticsearch/config/certs   # Used to store certificats outside the container.
+    user: "0"
+    # Following commands are used for self sign certificats creation.
+    # The file instances.yml will be used by the command to create certificats
+    command: >
+      bash -c '
+        if [ x${ELASTIC_PASSWORD} == x ]; then
+          echo "Set the ELASTIC_PASSWORD environment variable in the .env file";
+          exit 1;
+        elif [ x${KIBANA_PASSWORD} == x ]; then
+          echo "Set the KIBANA_PASSWORD environment variable in the .env file";
+          exit 1;
+        fi;
+        if [ ! -f config/certs/ca.zip ]; then
+          echo "Creating CA";
+          bin/elasticsearch-certutil ca --silent --pem -out config/certs/ca.zip;
+          unzip config/certs/ca.zip -d config/certs;
+        fi;
+        if [ ! -f config/certs/certs.zip ]; then
+          echo "Creating certs";
+          echo -ne \
+          "instances:\n"\
+          "  - name: elknode01\n"\
+          "    dns:\n"\
+          "      - elknode01\n"\
+          "      - localhost\n"\
+          "    ip:\n"\
+          "      - 127.0.0.1\n"\
+          "  - name: elknode02\n"\
+          "    dns:\n"\
+          "      - elknode02\n"\
+          "      - localhost\n"\
+          "    ip:\n"\
+          "      - 127.0.0.1\n"\
+          "  - name: elknode03\n"\
+          "    dns:\n"\
+          "      - elknode03\n"\
+          "      - localhost\n"\
+          "    ip:\n"\
+          "      - 127.0.0.1\n"\
+          "  - name: kibana\n"\
+          "    dns:\n"\
+          "      - kibana\n"\
+          "      - localhost\n"\
+          "    ip:\n"\
+          "      - 127.0.0.1\n"\
+          > config/certs/instances.yml;
+          bin/elasticsearch-certutil cert --silent --pem -out config/certs/certs.zip --in config/certs/instances.yml --ca-cert config/certs/ca/ca.crt --ca-key config/certs/ca/ca.key;
+          unzip config/certs/certs.zip -d config/certs;
+        fi;
+        echo "Setting file permissions"
+        chown -R root:root config/certs;
+        find . -type d -exec chmod 750 \{\} \;;
+        find . -type f -exec chmod 640 \{\} \;;
+        echo "Waiting for Elasticsearch availability";
+        until curl -s --cacert config/certs/ca/ca.crt https://elknode01:9200 | grep -q "missing authentication credentials"; do sleep 30; done;
+        echo "Setting kibana_system password";
+        until curl -s -X POST --cacert config/certs/ca/ca.crt -u "elastic:${ELASTIC_PASSWORD}" -H "Content-Type: application/json" https://elknode01:9200/_security/user/kibana_system/_password -d "{\"password\":\"${KIBANA_PASSWORD}\"}" | grep -q "^{}"; do sleep 10; done;
+        echo "All done!";
+      '
+    healthcheck:
+      test: ["CMD-SHELL", "[ -f config/certs/elknode/elknode01.crt ]"]
+      interval: 1s
+      timeout: 5s
+      retries: 120
+
+  ###########################################################################
+  # Start elknode01 => First node of the cluster
+  ###########################################################################
+  elknode01:
+    depends_on:
+      setup:
+        condition: service_healthy
+    image: docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
+    restart: always   # Will be restarted after reboot
+    volumes:
+      - ./certs:/usr/share/elasticsearch/config/certs # Contain certificats created in the service setup
+      - elknodedata01:/usr/share/elasticsearch/data
+    ports:
+      - ${ES_PORT}:9200
+    environment:
+      - node.name=elknode01
+      - cluster.name=${CLUSTER_NAME}
+      - cluster.initial_master_nodes=elknode01,elknode02,elknode03
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+      - bootstrap.memory_lock=true
+      - xpack.security.enabled=true
+      - xpack.security.http.ssl.enabled=true
+      - xpack.security.http.ssl.key=certs/elknode01/elknode01.key
+      - xpack.security.http.ssl.certificate=certs/elknode01/elknode01.crt
+      - xpack.security.http.ssl.certificate_authorities=certs/ca/ca.crt
+      - xpack.security.transport.ssl.enabled=true
+      - xpack.security.transport.ssl.key=certs/elknode01/elknode01.key
+      - xpack.security.transport.ssl.certificate=certs/elknode01/elknode01.crt
+      - xpack.security.transport.ssl.certificate_authorities=certs/ca/ca.crt
+      - xpack.security.transport.ssl.verification_mode=certificate
+      - xpack.license.self_generated.type=${LICENSE}
+      - xpack.ml.use_auto_machine_memory_percent=true
+    mem_limit: ${MEM_LIMIT}
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -s --cacert config/certs/ca/ca.crt https://localhost:9200 | grep -q 'missing authentication credentials'",
+        ]
+      interval: 10s
+      timeout: 10s
+      retries: 120
+
+  ###########################################################################
+  # Start elknode02 => Second node of the cluster
+  ###########################################################################
+  elknode01:
+    depends_on:
+      - elknode01
+    image: docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
+    restart: always   # Will be restarted after reboot
+    volumes:
+      - ./certs:/usr/share/elasticsearch/config/certs # Contain certificats created in the service setup
+      - elknodedata02:/usr/share/elasticsearch/data
+    ports:
+      - ${ES_PORT}:9200
+    environment:
+      - node.name=elknode02
+      - cluster.name=${CLUSTER_NAME}
+      - cluster.initial_master_nodes=elknode01,elknode02,elknode03
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+      - bootstrap.memory_lock=true
+      - xpack.security.enabled=true
+      - xpack.security.http.ssl.enabled=true
+      - xpack.security.http.ssl.key=certs/elknode02/elknode02.key
+      - xpack.security.http.ssl.certificate=certs/elknode02/elknode02.crt
+      - xpack.security.http.ssl.certificate_authorities=certs/ca/ca.crt
+      - xpack.security.transport.ssl.enabled=true
+      - xpack.security.transport.ssl.key=certs/elknode02/elknode02.key
+      - xpack.security.transport.ssl.certificate=certs/elknode02/elknode02.crt
+      - xpack.security.transport.ssl.certificate_authorities=certs/ca/ca.crt
+      - xpack.security.transport.ssl.verification_mode=certificate
+      - xpack.license.self_generated.type=${LICENSE}
+      - xpack.ml.use_auto_machine_memory_percent=true
+    mem_limit: ${MEM_LIMIT}
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -s --cacert config/certs/ca/ca.crt https://localhost:9200 | grep -q 'missing authentication credentials'",
+        ]
+      interval: 10s
+      timeout: 10s
+      retries: 120
+
+  ###########################################################################
+  # Start elknode03 => Last node of the cluster
+  ###########################################################################
+  elknode01:
+    depends_on:
+      - elknode02
+    image: docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
+    restart: always   # Will be restarted after reboot
+    volumes:
+      - ./certs:/usr/share/elasticsearch/config/certs # Contain certificats created in the service setup
+      - elknodedata03:/usr/share/elasticsearch/data
+    ports:
+      - ${ES_PORT}:9200
+    environment:
+      - node.name=elknode03
+      - cluster.name=${CLUSTER_NAME}
+      - cluster.initial_master_nodes=elknode01,elknode02,elknode03
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+      - bootstrap.memory_lock=true
+      - xpack.security.enabled=true
+      - xpack.security.http.ssl.enabled=true
+      - xpack.security.http.ssl.key=certs/elknode03/elknode03.key
+      - xpack.security.http.ssl.certificate=certs/elknode03/elknode03.crt
+      - xpack.security.http.ssl.certificate_authorities=certs/ca/ca.crt
+      - xpack.security.transport.ssl.enabled=true
+      - xpack.security.transport.ssl.key=certs/elknode03/elknode03.key
+      - xpack.security.transport.ssl.certificate=certs/elknode03/elknode03.crt
+      - xpack.security.transport.ssl.certificate_authorities=certs/ca/ca.crt
+      - xpack.security.transport.ssl.verification_mode=certificate
+      - xpack.license.self_generated.type=${LICENSE}
+      - xpack.ml.use_auto_machine_memory_percent=true
+    mem_limit: ${MEM_LIMIT}
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -s --cacert config/certs/ca/ca.crt https://localhost:9200 | grep -q 'missing authentication credentials'",
+        ]
+      interval: 10s
+      timeout: 10s
+      retries: 120
+
+  ###########################################################################
+  # Start a Kiban instance linked to the ELK elknode
+  ###########################################################################
+  kibana:
+    depends_on:
+      elknode01:
+        condition: service_healthy
+      elknode02:
+        condition: service_healthy
+      elknode03:
+        condition: service_healthy
+    image: docker.elastic.co/kibana/kibana:${STACK_VERSION}
+    restart: always   # Will be restarted after reboot
+    volumes:
+      - ./certs:/usr/share/elasticsearch/config/certs # Contain certificats created in the service setup
+      - kibanadata:/usr/share/kibana/data
+      - ./kibana.yml:/usr/share/kibana/config/kibana.yml    # the configuation file is store outside the container to allow easy setup of specific customization
+    ports:
+      - ${KIBANA_PORT}:5601
+    environment:
+      - SERVERNAME=kibana
+      - ELASTICSEARCH_HOSTS=https://elknode01:9200
+      - ELASTICSEARCH_USERNAME=kibana_system
+      - ELASTICSEARCH_PASSWORD=${KIBANA_PASSWORD}
+      - ELASTICSEARCH_SSL_CERTIFICATEAUTHORITIES=config/certs/ca/ca.crt
+    mem_limit: ${MEM_LIMIT}
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -s -I http://localhost:5601 | grep -q 'HTTP/1.1 302 Found'",
+        ]
+      interval: 10s
+      timeout: 10s
+      retries: 120
+
+  ###########################################################################
+  # Start a Fleet server based on the elastic-agent complete version
+  ###########################################################################
+  fleet_docker:
+    hostname: fleet_docker
+    image: docker.elastic.co/elastic-agent/elastic-agent-complete:${STACK_VERSION}
+    restart: always
+    volumes:
+      - ./certs:/certs
+      - ./fleet:/usr/share/elastic-agent/state
+    user: root
+    environment:
+      - FLEET_URL=https://127.0.0.1:8220
+      - FLEET_SERVER_ENABLE=true
+      - FLEET_SERVER_POLICY_NAME=POC_Fleet
+      - FLEET_SERVER_ELASTICSEARCH_HOST=https://elknode01:9200
+      - FLEET_SERVER_SERVICE_TOKEN=[FLEET_SERVER_SERVICE_TOKEN]
+      - ELASTICSEARCH_CA=/certs/ca/ca.crt
+      - FLEET_SERVER_ELASTICSEARCH_CA=/certs/ca/ca.crt
+      - FLEET_SERVER_CERT=/certs/fleet_docker/fleet_docker.crt
+      - FLEET_SERVER_CERT_KEY=/certs/fleet_docker/fleet_docker.key
+      - FLEET_SERVER_PORT=8220
+      - ELASTICSEARCH_HOST=https://elknode:9200
+      - FLEET_ENROLL=1
+
+volumes:
+  certs:
+    driver: local
+  elknodedata01:
+    driver: local
+  elknodedata02:
+    driver: local
+  elknodedata03:
+    driver: local
+  kibanadata:
+    driver: local
