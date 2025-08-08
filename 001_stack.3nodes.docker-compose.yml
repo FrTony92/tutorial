@@ -68,7 +68,7 @@ services:
         echo "All done!";
       '
     healthcheck:
-      test: ["CMD-SHELL", "[ -f config/certs/elknode/elknode01.crt ]"]
+      test: ["CMD-SHELL", "[ -f config/certs/elknode01/elknode01.crt ]"]
       interval: 1s
       timeout: 5s
       retries: 120
@@ -91,6 +91,7 @@ services:
       - node.name=elknode01
       - cluster.name=${CLUSTER_NAME}
       - cluster.initial_master_nodes=elknode01,elknode02,elknode03
+      - discovery.seed_hosts=elknode02,elknode03
       - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
       - bootstrap.memory_lock=true
       - xpack.security.enabled=true
@@ -137,6 +138,7 @@ services:
       - node.name=elknode02
       - cluster.name=${CLUSTER_NAME}
       - cluster.initial_master_nodes=elknode01,elknode02,elknode03
+      - discovery.seed_hosts=elknode01,elknode03
       - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
       - bootstrap.memory_lock=true
       - xpack.security.enabled=true
@@ -183,6 +185,7 @@ services:
       - node.name=elknode03
       - cluster.name=${CLUSTER_NAME}
       - cluster.initial_master_nodes=elknode01,elknode02,elknode03
+      - discovery.seed_hosts=elknode01,elknode02
       - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
       - bootstrap.memory_lock=true
       - xpack.security.enabled=true
