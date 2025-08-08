@@ -276,7 +276,11 @@ services:
 volumes:
   certs:
     driver: local
-  elknodedata:
+  elknodedata01:
+    driver: local
+  elknodedata02:
+    driver: local
+  elknodedata03:
     driver: local
   kibanadata:
     driver: local
