@@ -6,7 +6,7 @@ server.shutdownTimeout: "5s"
 elasticsearch.hosts: [ "http://elasticsearch:9200" ]
 monitoring.kibana.collection.enabled: true
 #------------------------------------ Security ----------------------------------------------
-# Allow TLS connection 
+# HTTPS connection for Kibana with TLS certificats 
 server.ssl.enabled: true
 elasticsearch.ssl.certificateAuthorities: [ "config/certs/ca/ca.crt" ]
 server.ssl.certificate: config/certs/kibana/kibana.crt
