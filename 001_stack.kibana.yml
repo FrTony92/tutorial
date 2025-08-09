@@ -1,7 +1,18 @@
+#-------------------------------------- Start -----------------------------------------------
+# Global settins
 server.host: "0.0.0.0"
+server.port: "5601"
 server.shutdownTimeout: "5s"
 elasticsearch.hosts: [ "http://elasticsearch:9200" ]
-monitoring.ui.container.elasticsearch.enabled: true
+monitoring.kibana.collection.enabled: true
+#------------------------------------ Security ----------------------------------------------
+# Allow TLS connection 
+server.ssl.enabled: true
+elasticsearch.ssl.certificateAuthorities: [ "config/certs/ca/ca.crt" ]
+server.ssl.certificate: config/certs/kibana/kibana.crt
+server.ssl.key: config/certs/kibana/kibana.key
+#--------------------------------- Other parameter ------------------------------------------
 # Mandatory to setup a fleet server
 xpack.encryptedSavedObjects:
   encryptionKey: "cle-de-32-bytes-minimum-pour-le-chiffrage"
+#--------------------------------------- End ------------------------------------------------
