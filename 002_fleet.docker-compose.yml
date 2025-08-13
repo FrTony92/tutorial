@@ -223,6 +223,7 @@ services:
       es03:
         condition: service_healthy
     image: docker.elastic.co/kibana/kibana:${STACK_VERSION}
+    restart: always   # Will be restarted after reboot
     volumes:
       - ./certs:/usr/share/kibana/config/certs  # Contain certificats created in the service setup
       - ./kibana.yml:/usr/share/kibana/config/kibana.yml    # the configuation file is store outside the container to allow easy setup of specific customization
@@ -251,7 +252,7 @@ services:
   fleet_docker:
     hostname: fleet_docker
     image: docker.elastic.co/elastic-agent/elastic-agent-complete:${STACK_VERSION}
-    restart: always
+    restart: always   # Will be restarted after reboot
     volumes:
       - ./certs:/certs
       - ./fleet:/usr/share/elastic-agent/state
