@@ -241,7 +241,7 @@ services:
       test:
         [
           "CMD-SHELL",
-          "curl -s -I http://localhost:5601 | grep -q 'HTTP/1.1 302 Found'",
+          "curl -s --cacert config/certs/ca/ca.crt -I https://localhost:5601 | grep -q 'HTTP/1.1 302 Found'",
         ]
       interval: 10s
       timeout: 10s
@@ -250,6 +250,8 @@ services:
   # Start a Fleet server based on the elastic-agent complete version
   ###########################################################################
   fleet_docker:
+    depends_on:
+      - kibana
     hostname: fleet_docker
     image: docker.elastic.co/elastic-agent/elastic-agent-complete:${STACK_VERSION}
     restart: always   # Will be restarted after reboot
@@ -257,6 +259,8 @@ services:
       - ./certs:/certs
       - ./fleet:/usr/share/elastic-agent/state
     user: root
+    ports:
+      - 8220:8220
     environment:
       - FLEET_URL=https://127.0.0.1:8220
       - FLEET_SERVER_ENABLE=true
