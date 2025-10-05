@@ -28,7 +28,7 @@ cd poc_elk
 mkdir certs
 curl -s -o .env https://raw.githubusercontent.com/FrTony92/tutorial/main/tuto01/001_stack.env
 ```
-Modification du fichier .env :
+Modification du fichier .env :</br>
 ELASTIC_PASSWORD=[PASSWORD]</br>
 KIBANA_PASSWORD=[PASSWORD]</br>
 STACK_VERSION=[VERSION]</br>
