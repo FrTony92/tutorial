@@ -36,8 +36,9 @@ STACK_VERSION=[VERSION]</br>
 ### Démarrage de la stack:
 ```
 curl -s -o docker-compose.yml https://raw.githubusercontent.com/FrTony92/tutorial/main/tuto01/001_stack.docker-compose.yml
+more docker-compose.yml
 curl -s -o kibana.yml https://raw.githubusercontent.com/FrTony92/tutorial/main/tuto01/001_stack.kibana.yml
-ls -alh
+cat kibana.yml
 docker compose up -d
 docker compose ps -a
 ```
