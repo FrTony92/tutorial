@@ -26,7 +26,7 @@ cd /data
 mkdir poc_elk
 cd poc_elk
 mkdir certs
-curl -s -o .env https://raw.githubusercontent.com/FrTony92/tutorial/main/001_stack.env
+curl -s -o .env https://raw.githubusercontent.com/FrTony92/tutorial/main/tuto01/001_stack.env
 ```
 Modification du fichier .env :
 ELASTIC_PASSWORD=[PASSWORD]
@@ -35,8 +35,8 @@ STACK_VERSION=[VERSION]
 
 ### Démarrage de la stack:
 ```
-curl -s -o docker-compose.yml https://raw.githubusercontent.com/FrTony92/tutorial/main/001_stack.docker-compose.yml
-curl -s -o kibana.yml https://raw.githubusercontent.com/FrTony92/tutorial/main/001_stack.kibana.yml
+curl -s -o docker-compose.yml https://raw.githubusercontent.com/FrTony92/tutorial/main/tuto01/001_stack.docker-compose.yml
+curl -s -o kibana.yml https://raw.githubusercontent.com/FrTony92/tutorial/main/tuto01/001_stack.kibana.yml
 ls -alh
 docker compose up -d
 docker compose ps -a
