@@ -29,9 +29,9 @@ mkdir certs
 curl -s -o .env https://raw.githubusercontent.com/FrTony92/tutorial/main/tuto01/001_stack.env
 ```
 Modification du fichier .env :
-ELASTIC_PASSWORD=[PASSWORD]
-KIBANA_PASSWORD=[PASSWORD]
-STACK_VERSION=[VERSION]
+ELASTIC_PASSWORD=[PASSWORD]</br>
+KIBANA_PASSWORD=[PASSWORD]</br>
+STACK_VERSION=[VERSION]</br>
 
 ### Démarrage de la stack:
 ```
