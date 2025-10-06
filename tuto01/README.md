@@ -1,11 +1,13 @@
 # Tutorial n°1 : Installation d'une stack Docker
 ***
 
-Ce tutorial est réalisé sur une VM Linux MINT 22 avec 16 Gb de RAM et 100 Gb de disque dur.</br>
+Ce tutorial est réalisé sur une VM Linux MINT 22.2 avec 16 Gb de RAM et 100 Gb de disque dur.</br>
 
 Les logiciels suivant doivent être installés:
 - GIT
 - Docker
+
+Le user utilisé doit appartenir au groupe `root`.
 
 Voici la liste des commandes utilisées lors du tuto:</br>
 ### Pour la partie ajustement OS:
@@ -48,4 +50,5 @@ docker compose ps -a
 curl https://127.0.0.1:9200 --cacert certs/ca/ca.crt -u "elastic":"elastic@docker"
 curl https://127.0.0.1:5601/status -I --cacert certs/ca/ca.crt
 ```
-
+> [!WARNING]
+> Si vous n'arrivez à utiliser les certificats ajoutez le groupe `root` a votre utilisateur
