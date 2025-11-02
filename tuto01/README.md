@@ -7,7 +7,11 @@ Les logiciels suivant doivent être installés:
 - GIT
 - Docker
 
-Le user utilisé doit appartenir au groupe `root`.
+Le user utilisé doit appartenir aux groupes `root` et `docker`:
+```
+sudo usermod -aG root [MON_USER]
+sudo usermod -aG docker [MON_USER]
+```
 
 Voici la liste des commandes utilisées lors du tuto:</br>
 ### Pour la partie ajustement OS:
