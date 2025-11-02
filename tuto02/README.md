@@ -20,10 +20,10 @@ sudo usermod -aG docker [MON_USER]
 ```
 cd /data/poc_elk
 sudo chown -R opc /data/poc_elk
-docker compose ps
 cd certs
 curl -o fleet_docker.yml -s https://raw.githubusercontent.com/FrTony92/tutorial/main/tuto02/002_fleet.fleet_docker.yml
-ls -alh
+cat fleet_docker.yml
+docker compose ps
 docker exec -it poc-es01-1 bash
 bin/elasticsearch-certutil cert --silent --pem -out config/certs/fleet_docker.zip --in config/certs/fleet_docker.yml --ca-cert config/certs/ca/ca.crt --ca-key config/certs/ca/ca.key
 exit
