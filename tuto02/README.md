@@ -22,7 +22,7 @@ cd /data/poc_elk
 sudo chown -R opc /data/poc_elk
 docker compose ps
 cd certs
-curl -o fleet_docker.yml -s https://raw.githubusercontent.com/FrTony92/tutorial/main/002_fleet.fleet_docker.yml
+curl -o fleet_docker.yml -s https://raw.githubusercontent.com/FrTony92/tutorial/main/tuto02/002_fleet.fleet_docker.yml
 ls -alh
 docker exec -it poc-es01-1 bash
 bin/elasticsearch-certutil cert --silent --pem -out config/certs/fleet_docker.zip --in config/certs/fleet_docker.yml --ca-cert config/certs/ca/ca.crt --ca-key config/certs/ca/ca.key
@@ -30,6 +30,6 @@ exit
 ls -alh
 unzip fleet_docker.zip
 cd ..
-curl -o docker-compose.yml -s https://raw.githubusercontent.com/FrTony92/tutorial/main/002_fleet.docker-compose.yml
+curl -o docker-compose.yml -s https://raw.githubusercontent.com/FrTony92/tutorial/main/tuto02/002_fleet.docker-compose.yml
 cat docker-compose.yml
 ```
