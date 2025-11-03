@@ -31,28 +31,28 @@ ls -alh
 unzip fleet_docker.zip
 cd ..
 ```
-Retour dans l'interface graphique.
-Ouverture de l'interface Fleet Server
-Burger menu (icone avec  3 lines) => Management => Fleet
-Partie Output, selectionner la ligne "default" remplacer:
+Retour dans l'interface graphique.</br>
+Ouverture de l'interface Fleet Server</br>
+Burger menu (icone avec  3 lines) => Management => Fleet</br>
+Partie Output, selectionner la ligne "default" remplacer:</br>
 - `http://localhost:9200` par  `https://es01:9200`
 - Dans "Advanced YAML configuration" ajouter `ssl.certificate_authorities: ["/certs/ca/ca.crt"]`
 
-Allez au menu "Agent " puis "Add Fleet Server":  
-Selectionner "Advanced"  
+Allez au menu "Agent " puis "Add Fleet Server":</br>
+Selectionner "Advanced"</br>
 **Point 1 - Create a policy for Fleet Server"**  
-Changer le nom par "POC_Fleet"  
-\-- Attendre 5 mn --  
+Changer le nom par "POC_Fleet"</br>  
+\-- Attendre 5 mn --</br>
 **Point 2 - Choose a deployment mode for security**  
-Selectionner Production  
+Selectionner Production</br> 
 **Point 3 - Add your Fleet Server host**  
-Nom: fleet_docker  
-URL: https://127.0.0.1:8220  
-Authentication:  
-Copiez le certificate et la clé du répertoire `certs`  
+Nom: fleet_docker</br>
+URL: https://127.0.0.1:8220  </br>
+Authentication:  </br>
+Copiez le certificate et la clé du répertoire `certs`  </br>
 **Point 4 - Generate a service token**  
-Click on button  
-Garder l eTOKEN à l'écran.
+Click on button  </br>
+Garder le TOKEN à l'écran.</br>
 ***
 Retour en mode commande
 ```
@@ -60,8 +60,8 @@ curl -o docker-compose.yml -s https://raw.githubusercontent.com/FrTony92/tutoria
 cat docker-compose.yml
 ```
 
-Ouvrir le fichier docker-compose.yml et fair ele remplacement suivant:
-`[REPLACE_BY_FLEET_TOKEN_CREATED_BY_KIBANA]` par le TOKEN de l'écran de configuration.
+Ouvrir le fichier docker-compose.yml et fair ele remplacement suivant:</br>
+`[REPLACE_BY_FLEET_TOKEN_CREATED_BY_KIBANA]` par le TOKEN de l'écran de configuration.</br>
 ***
 Démarrer the fleet:
 ```
@@ -78,5 +78,5 @@ Test du Fleet Server:
 curl --cacert certs/ca/ca.crt  https://127.0.0.1:8220/api/status
 ```
 ***
-Retour dans Kibana, le Fleet Server doit être en statut Updating puis Healthy.  
+Retour dans Kibana, le Fleet Server doit être en statut Updating puis Healthy.</br>
 Vérifiez que la CPU et la mémoire ne sont pas en N/A.
