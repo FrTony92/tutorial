@@ -64,7 +64,7 @@ Ouvrir le fichier docker-compose.yml et faire le remplacement suivant:</br>
 ***
 Démarrez le Fleet Server:
 ```
-docker-compose up -d fleet_docker
+docker compose up -d fleet_docker
 ```
 ***
 Regardez la log du container:
