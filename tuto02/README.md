@@ -19,7 +19,7 @@ sudo usermod -aG docker [MON_USER]
 ## Déroulé et liste des commandes</br>
 ```
 cd /data/poc_elk
-sudo chown -R opc /data/poc_elk
+sudo chown -R ${USER} /data/poc_elk
 docker compose ps
 cd certs
 curl -o fleet_docker.yml -s https://raw.githubusercontent.com/FrTony92/tutorial/main/tuto02/002_fleet.fleet_docker.yml
