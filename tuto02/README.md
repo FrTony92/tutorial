@@ -33,8 +33,8 @@ cd ..
 ```
 Retour dans l'interface graphique.</br>
 Ouverture de l'interface Fleet Server</br>
-Burger menu (icone avec  3 lines) => Management => Fleet</br>
-Partie Output, selectionner la ligne "default" remplacer:</br>
+Burger menu (icone avec  3 lignes) => Management => Fleet</br>
+Partie Output, selectionnez la ligne "default" remplacer:</br>
 - `http://localhost:9200` par  `https://es01:9200`
 - Dans "Advanced YAML configuration" ajouter `ssl.certificate_authorities: ["/certs/ca/ca.crt"]`
 
@@ -54,16 +54,16 @@ Copiez le certificate et la clé du répertoire `certs`  </br>
 Click on button  </br>
 Garder le TOKEN à l'écran.</br>
 ***
-Retour en mode commande
+Retour dans le terminal
 ```
 curl -o docker-compose.yml -s https://raw.githubusercontent.com/FrTony92/tutorial/main/tuto02/002_fleet.docker-compose.yml
 cat docker-compose.yml
 ```
 
-Ouvrir le fichier docker-compose.yml et fair ele remplacement suivant:</br>
+Ouvrir le fichier docker-compose.yml et faire le remplacement suivant:</br>
 `[REPLACE_BY_FLEET_TOKEN_CREATED_BY_KIBANA]` par le TOKEN de l'écran de configuration.</br>
 ***
-Démarrer the fleet:
+Démarrez le Fleet Server:
 ```
 docker-compose up -d fleet_docker
 ```
