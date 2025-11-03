@@ -29,7 +29,6 @@ bin/elasticsearch-certutil cert --silent --pem -out config/certs/fleet_docker.zi
 exit
 ls -alh
 unzip fleet_docker.zip
-cd ..
 ```
 Retour dans l'interface graphique.</br>
 Ouverture de l'interface Fleet Server</br>
@@ -49,7 +48,7 @@ Selectionner Production</br>
 Nom: fleet_docker</br>
 URL: https://127.0.0.1:8220  </br>
 Authentication:  </br>
-Copiez le certificate et la clé du répertoire `certs`  </br>
+Copiez le certificate et la clé des répertoires `certs/ca/ca.crt` et `certs/fleet_server/` fichiers .crt et .key . </br>
 **Point 4 - Generate a service token**  
 Click on button  </br>
 Garder le TOKEN à l'écran.</br>
