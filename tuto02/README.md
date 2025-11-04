@@ -13,21 +13,46 @@ Les logiciels suivant doivent être installés:
 Le user utilisé doit appartenir aux groupes `root` et `docker`:
 ```
 sudo usermod -aG root [MON_USER]
+```
+```
 sudo usermod -aG docker [MON_USER]
 ```
 ***
 ## Déroulé et liste des commandes</br>
 ```
+cat /etc/hosts
+```
+```
 cd /data/poc_elk
+```
+```
 sudo chown -R ${USER} /data/poc_elk
+```
+```
 docker compose ps
+```
+```
 cd certs
+```
+```
 curl -o fleet_docker.yml -s https://raw.githubusercontent.com/FrTony92/tutorial/main/tuto02/002_fleet.fleet_docker.yml
+```
+```
 ls -alh
+```
+```
 docker exec -it poc-es01-1 bash
+```
+```
 bin/elasticsearch-certutil cert --silent --pem -out config/certs/fleet_docker.zip --in config/certs/fleet_docker.yml --ca-cert config/certs/ca/ca.crt --ca-key config/certs/ca/ca.key
+```
+```
 exit
+```
+```
 ls -alh
+```
+```
 unzip fleet_docker.zip
 ```
 Retour dans l'interface graphique.</br>
@@ -35,7 +60,10 @@ Ouverture de l'interface Fleet Server</br>
 Burger menu (icone avec  3 lignes) => Management => Fleet</br>
 Partie Output, selectionnez la ligne "default" remplacer:</br>
 - `http://localhost:9200` par  `https://es01:9200`
-- Dans "Advanced YAML configuration" ajouter `ssl.certificate_authorities: ["/certs/ca/ca.crt"]`
+- Dans "Advanced YAML configuration" ajouter 
+```
+ssl.certificate_authorities: ["/certs/ca/ca.crt"]
+```
 
 Allez au menu "Agent " puis "Add Fleet Server":</br>
 Selectionner "Advanced"</br>
@@ -56,6 +84,8 @@ Garder le TOKEN à l'écran.</br>
 Retour dans le terminal
 ```
 curl -o docker-compose.yml -s https://raw.githubusercontent.com/FrTony92/tutorial/main/tuto02/002_fleet.docker-compose.yml
+```
+```
 cat docker-compose.yml
 ```
 
@@ -79,3 +109,30 @@ curl --cacert certs/ca/ca.crt  https://127.0.0.1:8220/api/status
 ***
 Retour dans Kibana, le Fleet Server doit être en statut Updating puis Healthy.</br>
 Vérifiez que la CPU et la mémoire ne sont pas en N/A.
+***
+## Activation de la surveillance de la stack
+Ouvrir la policy "fleet_docker".
+Ajouter l'integration `Elasticsearch`:</br>
+- Nom: elasticsearch-elk_poc</br>
+Dans la partie "Metrics (Stack Monitoring)":</br>
+  - Settings
+    - Hosts: https://es01.9200
+    Advanced options:
+      - Username: elastic
+      - Password: elastic@docker
+      - Scope: cluster
+      - SSL Configuration: 
+        ```
+        ssl.certificate_authorities: ["/certs/ca/ca.crt"]
+        ```
+Ajouter l'integration `Kibana`:
+- Nom: kibana-elk_poc
+- Metrics (Stack Monitoring): 
+  - Hosts: https://kibana:5601
+  Advanced options:
+    - Username: elastic
+    - Password: elastic@docker
+    - SSL Configuration: 
+      ```
+      certificate_authorities: ["/certs/ca/ca.crt"]
+      ```
