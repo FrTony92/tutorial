@@ -81,15 +81,18 @@ Puis `Create policy`</br>
 \-- Attendre 5 mn --</br>
 **Point 2 - Choose a deployment mode for security**  
 Selectionner Production</br> 
+
 **Point 3 - Add your Fleet Server host**  
 Nom: fleet_docker</br>
 URL: https://127.0.0.1:8220  </br>
 Authentication:  </br>
-Copiez le certificate et la clé des répertoires `certs/ca/ca.crt` et `certs/fleet_server/` fichiers .crt et .key . </br>
+Copiez le certificate et la clé des répertoires `certs/ca/ca.crt` et `certs/fleet_server/` fichiers `fleet_server.crt` et `fleet_server.key` . </br>
+
 **Point 4 - Generate a service token**  
 Click on button  </br>
 Garder le TOKEN à l'écran.</br>
 ***
+
 Retour dans le terminal
 ```
 cd ..
