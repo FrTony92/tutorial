@@ -35,13 +35,13 @@ docker compose ps
 cd certs
 ```
 ```
+ls -alh
+```
+```
 curl -o fleet_docker.yml -s https://raw.githubusercontent.com/FrTony92/tutorial/main/tuto02/002_fleet.fleet_docker.yml
 ```
 ```
 cat fleet_docker.yml
-```
-```
-ls -alh
 ```
 ```
 docker exec -it poc-es01-1 bash
