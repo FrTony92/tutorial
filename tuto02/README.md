@@ -38,6 +38,9 @@ cd certs
 curl -o fleet_docker.yml -s https://raw.githubusercontent.com/FrTony92/tutorial/main/tuto02/002_fleet.fleet_docker.yml
 ```
 ```
+cat fleet_docker.yml
+```
+```
 ls -alh
 ```
 ```
@@ -89,6 +92,7 @@ Garder le TOKEN à l'écran.</br>
 ***
 Retour dans le terminal
 ```
+cd ..
 curl -o docker-compose.yml -s https://raw.githubusercontent.com/FrTony92/tutorial/main/tuto02/002_fleet.docker-compose.yml
 ```
 ```
