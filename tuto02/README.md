@@ -136,3 +136,4 @@ Ajouter l'integration `Kibana`:
       ```
       certificate_authorities: ["/certs/ca/ca.crt"]
       ```
+Revenir à l'écran principal et choisir "Monitor the stack".
