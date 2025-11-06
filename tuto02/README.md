@@ -86,7 +86,10 @@ Selectionner Production</br>
 Nom: fleet_docker</br>
 URL: https://127.0.0.1:8220  </br>
 Authentication:  </br>
-Copiez le certificate et la clé des répertoires `certs/ca/ca.crt` et `certs/fleet_server/` fichiers `fleet_server.crt` et `fleet_server.key` . </br>
+Copiez les certificates:
+- `Server SSL certificate authorities`: contenu du fichier `certs/ca/ca.crt`,
+- `Client SSL certificate`: contenu du fichier `certs/fleet_server/fleet_server.crt`,
+- `Client SSL certificate key`: contenu du fichier `certs/fleet_server/fleet_server.key`
 
 **Point 4 - Generate a service token**  
 Click on button  </br>
