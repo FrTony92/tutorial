@@ -12,10 +12,10 @@ Les logiciels suivant doivent être installés:
 
 Le user utilisé doit appartenir aux groupes `root` et `docker`:
 ```
-sudo usermod -aG root [MON_USER]
+sudo usermod -aG root ${USER}
 ```
 ```
-sudo usermod -aG docker [MON_USER]
+sudo usermod -aG docker ${USER}
 ```
 ***
 ## Déroulé et liste des commandes</br>
