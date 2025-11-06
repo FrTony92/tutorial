@@ -70,8 +70,10 @@ Selectionner "Advanced"</br>
 **Point 1 - Create a policy for Fleet Server"**  
 Changer le nom par "POC_Fleet"</br>
 Ouvrir "Advanced options"</br>
-Mettre le paramètre "Inactiviy timeout" à 600 => 600s = 5mn car notre Fleet est un container qui sera automatiquement détruit après 5m d'inactivité.</br>
-`Create policy`</br>
+Mettre le paramètre "Inactiviy timeout" à 600 </br>
+=> 600s = 5mn car notre Fleet est un container qui sera automatiquement détruit après 5m d'inactivité.</br>
+
+Puis `Create policy`</br>
 
 \-- Attendre 5 mn --</br>
 **Point 2 - Choose a deployment mode for security**  
