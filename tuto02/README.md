@@ -23,7 +23,7 @@ sudo usermod -aG docker ${USER}
 ip a | grep inet    # Pour retrouver l'IP de notre serveur
 ```
 ```
-cat /etc/hosts      # Vérifier que l'IP a été renseignée
+vi /etc/hosts      # Ajouter fleet_docker
 ```
 ```
 cd /data/poc_elk
@@ -87,7 +87,7 @@ Selectionner Production</br>
 
 **Point 3 - Add your Fleet Server host**  
 Nom: fleet_docker</br>
-URL: https://127.0.0.1:8220  </br>
+URL: https://fleet_docker:8220  </br>
 Authentication:  </br>
 Copiez les certificates:
 - `Server SSL certificate authorities`: contenu du fichier `certs/ca/ca.crt`,
@@ -123,7 +123,7 @@ docker compose logs fleet_docker -f
 ***
 Test du Fleet Server:
 ```
-curl --cacert certs/ca/ca.crt  https://127.0.0.1:8220/api/status
+curl --cacert certs/ca/ca.crt  https://fleet_docker:8220/api/status
 ```
 ***
 Retour dans Kibana, le Fleet Server doit être en statut Updating puis Healthy.</br>
@@ -135,7 +135,10 @@ Ajouter l'integration `Elasticsearch`:</br>
 - Nom: elasticsearch-elk_poc</br>
 Dans la partie "Metrics (Stack Monitoring)":</br>
   - Settings
-    - Hosts: https://es01.9200
+    - Hosts:
+      ```
+      https://es01:9200
+      ```
     Advanced options:
       - Username: elastic
       - Password: elastic@docker
@@ -147,7 +150,10 @@ Dans la partie "Metrics (Stack Monitoring)":</br>
 Ajouter l'integration `Kibana`:
 - Nom: kibana-elk_poc
 - Metrics (Stack Monitoring): 
-  - Hosts: https://kibana:5601
+  - Hosts:
+    ```
+    https://kibana:5601
+    ```
   Advanced options:
     - Username: elastic
     - Password: elastic@docker
