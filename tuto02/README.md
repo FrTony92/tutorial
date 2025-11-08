@@ -20,7 +20,10 @@ sudo usermod -aG docker ${USER}
 ***
 ## Déroulé et liste des commandes</br>
 ```
-cat /etc/hosts
+ip a | grep inet    # Pour retrouver l'IP de notre serveur
+```
+```
+cat /etc/hosts      # Vérifier que l'IP a été renseignée
 ```
 ```
 cd /data/poc_elk
@@ -41,7 +44,7 @@ ls -alh
 curl -o fleet_docker.yml -s https://raw.githubusercontent.com/FrTony92/tutorial/main/tuto02/002_fleet.fleet_docker.yml
 ```
 ```
-cat fleet_docker.yml
+vi fleet_docker.yml             # Ajouter l'IP du serveur
 ```
 ```
 docker exec -it poc-es01-1 bash
