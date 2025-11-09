@@ -23,7 +23,7 @@ sudo usermod -aG docker ${USER}
 ip a | grep inet    # Pour retrouver l'IP de notre serveur
 ```
 ```
-vi /etc/hosts      # Ajouter fleet_docker
+sudo vi /etc/hosts      # Ajouter fleet_docker
 ```
 ```
 cd /data/poc_elk
