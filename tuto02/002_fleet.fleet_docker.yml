@@ -5,3 +5,4 @@ instances:
        - localhost
      ip:
        - 127.0.0.1
+       - [IP_LOCAL]
