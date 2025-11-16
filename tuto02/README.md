@@ -105,6 +105,7 @@ cat /data/poc_elk/certs/fleet_docker/fleet_docker.crt
 ```
 cat /data/poc_elk/certs/fleet_docker/fleet_docker.key
 ```
+Choisir pour `Client auth`, `Required`</br>
 
 **Point 4 - Generate a service token**  
 Click on button  </br>
