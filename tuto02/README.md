@@ -135,7 +135,7 @@ docker compose logs fleet_docker -f
 ***
 Test du Fleet Server:
 ```
-curl --cacert certs/ca/ca.crt  https://fleet_docker:8220/api/status
+curl --cacert /data/poc_elk/certs/ca/ca.crt  https://fleet_docker:8220/api/status
 ```
 ***
 Retour dans Kibana, le Fleet Server doit être en statut Updating puis Healthy.</br>
