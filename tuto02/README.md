@@ -71,7 +71,7 @@ Partie Output, selectionnez la ligne "default" remplacer:</br>
 - `http://localhost:9200` par  `https://es01:9200`
 - Dans "Advanced YAML configuration" ajouter 
 ```
-ssl.certificate_authorities: ["/certs/ca/ca.crt"]
+certificate_authorities: ["/certs/ca/ca.crt"]
 ```
 
 Allez au menu "Agent " puis "Add Fleet Server":</br>
