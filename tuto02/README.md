@@ -142,9 +142,9 @@ Retour dans Kibana, le Fleet Server doit être en statut Updating puis Healthy.<
 Vérifiez que la CPU et la mémoire ne sont pas en N/A.
 ***
 ## Activation de la surveillance de la stack
-Ouvrir la policy "fleet_docker".
+Ouvrir la policy "POC_Fleet".
 Ajouter l'integration `Elasticsearch`:</br>
-- Nom: elasticsearch-elk_poc</br>
+- Nom: `elasticsearch-elk_poc`</br>
 Dans la partie "Metrics (Stack Monitoring)":</br>
   - Settings
     - Hosts:
@@ -152,25 +152,40 @@ Dans la partie "Metrics (Stack Monitoring)":</br>
       https://es01:9200
       ```
     Advanced options:
-      - Username: elastic
-      - Password: elastic@docker
-      - Scope: cluster
+      - Username:
+           ```
+           elastic
+           ```
+      - Password:
+           ```
+           elastic@docker`
+           ```
+      - Scope: `cluster`
       - SSL Configuration: 
-        ```
-        ssl.certificate_authorities: ["/certs/ca/ca.crt"]
-        ```
+           ```
+           certificate_authorities: ["/certs/ca/ca.crt"]
+           ```
 Ajouter l'integration `Kibana`:
-- Nom: kibana-elk_poc
+- Nom:
+     ```
+     kibana-elk_poc
+     ```
 - Metrics (Stack Monitoring): 
   - Hosts:
-    ```
-    https://kibana:5601
-    ```
+       ```
+       https://kibana:5601
+       ```
   Advanced options:
-    - Username: elastic
-    - Password: elastic@docker
+    - Username:
+         ```
+         elastic
+         ```
+    - Password:
+         ```
+         elastic@docker
+         ```
     - SSL Configuration: 
-      ```
-      certificate_authorities: ["/certs/ca/ca.crt"]
-      ```
+         ```
+         certificate_authorities: ["/certs/ca/ca.crt"]
+         ```
 Revenir à l'écran principal et choisir "Monitor the stack".
