@@ -99,11 +99,11 @@ cat /data/poc_elk/certs/ca/ca.crt
 ```
 - `Client SSL certificate`:
 ```
-cat /data/poc_elk/certs/fleet_server/fleet_server.crt`,
+cat /data/poc_elk/certs/fleet_server/fleet_server.crt
 ```
 - `Client SSL certificate key`:
 ```
-cat /data/poc_elk/certs/fleet_server/fleet_server.key`
+cat /data/poc_elk/certs/fleet_server/fleet_server.key
 ```
 
 **Point 4 - Generate a service token**  
