@@ -61,6 +61,9 @@ ls -alh
 ```
 unzip fleet_docker.zip
 ```
+```
+cd ..
+```
 Retour dans l'interface graphique.</br>
 Ouverture de l'interface Fleet Server</br>
 Burger menu (icone avec  3 lignes) => Management => Fleet</br>
