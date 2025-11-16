@@ -1,7 +1,7 @@
 # Tutorial n°1 : Installation d'une stack Docker
 ***
 
-Ce tutorial est réalisé sur une VM Linux MINT 22.2 avec 16 Gb de RAM et 100 Gb de disque dur.</br>
+Ce tutorial est réalisé sur une VM Linux Ubuntu Desktop 25.10 avec 16 Gb de RAM et 100 Gb de disque dur.</br>
 
 logiciels intallés:
 - Docker
@@ -15,7 +15,11 @@ sudo usermod -aG docker ${USER}
 ```
 
 Voici la liste des commandes utilisées lors du tuto:</br>
-### Pour la partie ajustement OS:
+### Partie ajustement OS:
+```
+sudo sysctl -a | grep vm.max_map_count
+```
+Passer les commandes suivante si le résultat est inférieur à 70000 
 ```
 sudo vi /etc/sysctl.conf
 ```
@@ -24,10 +28,6 @@ vm.max_map_count=262144
 ```
 ```
 sudo reboot
-```
-Après reboot:
-```
-sudo sysctl -a | grep vm.max_map_count
 ```
 ### Pour l'installation:
 ```
@@ -89,10 +89,10 @@ docker compose ps -a
 
 ### Test de la stack:
 ```
-curl https://127.0.0.1:9200 --cacert certs/ca/ca.crt -u "elastic":"elastic@docker"
+curl https://es01:9200 --cacert certs/ca/ca.crt -u "elastic":"elastic@docker"
 ```
 ```
-curl https://127.0.0.1:5601/status -I --cacert certs/ca/ca.crt
+curl https://kibana:5601/status -I --cacert certs/ca/ca.crt
 ```
 > [!WARNING]
 > Si vous n'arrivez à utiliser les certificats ajoutez le groupe `root` a votre utilisateur
