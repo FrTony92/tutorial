@@ -114,7 +114,6 @@ Garder le TOKEN à l'écran.</br>
 
 Retour dans le terminal
 ```
-cd ..
 curl -o docker-compose.yml -s https://raw.githubusercontent.com/FrTony92/tutorial/main/tuto02/002_fleet.docker-compose.yml
 ```
 ```
