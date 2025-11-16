@@ -93,9 +93,18 @@ Nom: `fleet_docker`</br>
 URL: `https://fleet_docker:8220`</br>
 Authentication:  </br>
 Copiez les certificates:
-- `Server SSL certificate authorities`: contenu du fichier `certs/ca/ca.crt`,
-- `Client SSL certificate`: contenu du fichier `certs/fleet_server/fleet_server.crt`,
-- `Client SSL certificate key`: contenu du fichier `certs/fleet_server/fleet_server.key`
+- `Server SSL certificate authorities`: 
+```
+cat /data/poc_elk/certs/ca/ca.crt
+```
+- `Client SSL certificate`:
+```
+cat /data/poc_elk/certs/fleet_server/fleet_server.crt`,
+```
+- `Client SSL certificate key`:
+```
+cat /data/poc_elk/certs/fleet_server/fleet_server.key`
+```
 
 **Point 4 - Generate a service token**  
 Click on button  </br>
