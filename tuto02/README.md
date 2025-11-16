@@ -86,8 +86,8 @@ Puis `Create policy`</br>
 Selectionner Production</br> 
 
 **Point 3 - Add your Fleet Server host**  
-Nom: fleet_docker</br>
-URL: https://fleet_docker:8220  </br>
+Nom: `fleet_docker`</br>
+URL: `https://fleet_docker:8220`</br>
 Authentication:  </br>
 Copiez les certificates:
 - `Server SSL certificate authorities`: contenu du fichier `certs/ca/ca.crt`,
