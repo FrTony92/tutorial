@@ -69,9 +69,10 @@ Ouverture de l'interface Fleet Server</br>
 Burger menu (icone avec  3 lignes) => Management => Fleet</br>
 Partie Output, selectionnez la ligne "default" remplacer:</br>
 - `http://localhost:9200` par  `https://es01:9200`
-- Dans "Advanced YAML configuration" ajouter 
+Ouvrir `Authentication`:  </br>
+`Server SSL certificate authorities` mettre le contenu de : 
 ```
-certificate_authorities: ["/certs/ca/ca.crt"]
+cat /data/poc_elk/certs/ca/ca.crt
 ```
 
 Allez au menu "Agent " puis "Add Fleet Server":</br>
