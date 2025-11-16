@@ -59,7 +59,7 @@ STACK_VERSION=[VERSION]</br>
 ### Modification des résolutions DNS
 
 ```
-ip a | grep intet                 # copiez  l'IP du serveur
+ip a | grep inet                 # copiez  l'IP du serveur
 ```
 ```
 sudo vi /etc/hosts
