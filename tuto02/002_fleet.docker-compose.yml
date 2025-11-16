@@ -253,7 +253,7 @@ services:
     depends_on:
       - kibana
     hostname: fleet_docker
-    image: docker.elastic.co/elastic-agent/elastic-agent-complete:${STACK_VERSION}
+    image: docker.elastic.co/elastic-agent/elastic-agent:${STACK_VERSION}
     restart: always   # Will be restarted after reboot
     volumes:
       - ./certs:/certs
