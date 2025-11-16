@@ -56,6 +56,17 @@ ELASTIC_PASSWORD=[PASSWORD]</br>
 KIBANA_PASSWORD=[PASSWORD]</br>
 STACK_VERSION=[VERSION]</br>
 
+### Modification des résolutions DNS
+
+```
+ip a | grep intet                 # copiez  l'IP du serveur
+```
+```
+sudo vi /etc/hosts
+
+[IP_Serveur]    es01 kibana
+```
+
 ### Démarrage de la stack:
 ```
 curl -s -o docker-compose.yml https://raw.githubusercontent.com/FrTony92/tutorial/main/tuto01/001_stack.docker-compose.yml
