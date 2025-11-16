@@ -3,8 +3,7 @@
 
 Ce tutorial est réalisé sur une VM Linux MINT 22.2 avec 16 Gb de RAM et 100 Gb de disque dur.</br>
 
-Les logiciels suivant doivent être installés:
-- GIT
+logiciels intallés:
 - Docker
 
 Le user utilisé doit appartenir aux groupes `root` et `docker`:
