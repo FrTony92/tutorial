@@ -2,6 +2,7 @@
 ***
 
 Ce tutorial est réalisé sur une VM Linux Ubuntu Desktop 25.10 avec 16 Gb de RAM et 100 Gb de disque dur.</br>
+De préference, utilisez une IP fixe.</br>
 
 logiciels intallés:
 - Docker
@@ -19,7 +20,7 @@ Voici la liste des commandes utilisées lors du tuto:</br>
 ```
 sudo sysctl -a | grep vm.max_map_count
 ```
-Passer les commandes suivante si le résultat est inférieur à 70000 
+Passez les commandes suivantes si le résultat est inférieur à 200000 
 ```
 sudo vi /etc/sysctl.conf
 ```
@@ -51,16 +52,17 @@ mkdir certs
 ```
 curl -s -o .env https://raw.githubusercontent.com/FrTony92/tutorial/main/tuto01/001_stack.env
 ```
-Modification du fichier .env :</br>
+Modification du fichier .env pour définir le mot de passe des utilisateur `elastic` et `kibana_system` ainsi que la version de la stack ELK qui va être utilisée :</br>
 ELASTIC_PASSWORD=[PASSWORD]</br>
 KIBANA_PASSWORD=[PASSWORD]</br>
 STACK_VERSION=[VERSION]</br>
 
-### Modification des résolutions DNS
+### Modification des résolutions de noms (DNS)
 
 ```
 ip a | grep inet                 # copiez  l'IP du serveur
 ```
+Modifiez le fichier de résolution de noms pour prendre en compte votre IP.
 ```
 sudo vi /etc/hosts
 
