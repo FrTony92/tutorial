@@ -1,7 +1,7 @@
 # Tutorial n°1 : Installation d'une stack Docker
 ***
 
-Ce tutorial est réalisé sur une VM Linux Ubuntu Desktop 25.10 avec 16 Gb de RAM et 100 Gb de disque dur.</br>
+Ce tutorial est réalisé sur une VM Linux Ubuntu Server 24.04 avec 8 Gb de RAM, 6 vCPU et 128 Gb de disque dur.</br>
 De préference, utilisez une IP fixe.</br>
 
 logiciels intallés:
