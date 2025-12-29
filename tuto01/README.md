@@ -10,12 +10,11 @@ logiciels intallés:
 Le user utilisé doit appartenir aux groupes `root` et `docker`:
 ```
 sudo usermod -aG root ${USER}
-newgrp root
 ```
 ```
 sudo usermod -aG docker ${USER}
-newgrp docker
 ```
+Faire ensuite logout puis login et vérifier avec le commande `id`.</br>
 
 Voici la liste des commandes utilisées lors du tuto:</br>
 ### Partie ajustement OS:
