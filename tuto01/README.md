@@ -91,11 +91,17 @@ docker compose ps -a
 ```
 
 ### Test de la stack:
+Vérification de la création des certificats autosignés:</br>
 ```
-curl https://es01:9200 --cacert certs/ca/ca.crt -u "elastic":"elastic@docker"
+ls -alh /data/poc_elk/certs
 ```
+Affichage de l'état du premier noeuds:</br>
 ```
-curl https://kibana:5601/status -I --cacert certs/ca/ca.crt
+curl https://es01:9200 --cacert /data/poc_elk/certs/ca/ca.crt -u "elastic":"elastic@docker"
+```
+Afficahge de l'état du Kibana:</br>
+```
+curl https://kibana:5601/status -I --cacert /data/poc_elk/certs/ca/ca.crt
 ```
 > [!WARNING]
 > Si vous n'arrivez à utiliser les certificats ajoutez le groupe `root` a votre utilisateur
