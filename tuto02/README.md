@@ -95,19 +95,20 @@ Nom: `fleet_docker`</br>
 URL: `https://fleet_docker:8220`</br>
 Authentication:  </br>
 Copiez les certificates:
-- `Server SSL certificate authorities`: 
+- `Fleet Server > Elastic Agents certificate authorities`: 
 ```
 cat /data/poc_elk/certs/ca/ca.crt
 ```
-- `Client SSL certificate`:
+- `Fleet Server > SSL server certificate`:
 ```
 cat /data/poc_elk/certs/fleet_docker/fleet_docker.crt
 ```
-- `Client SSL certificate key`:
+- `Fleet Server > SSL server private key`:
 ```
 cat /data/poc_elk/certs/fleet_docker/fleet_docker.key
 ```
 Choisir pour `Client auth`, `Required`</br>
+Terminez par `Add host`</br>
 
 **Point 4 - Generate a service token**  
 Click on button  </br>
