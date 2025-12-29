@@ -95,7 +95,7 @@ Vérification de la création des certificats autosignés:</br>
 ```
 ls -alh /data/poc_elk/certs
 ```
-Affichage de l'état du premier noeuds:</br>
+Affichage de l'état du premier noeud:</br>
 ```
 curl https://es01:9200 --cacert /data/poc_elk/certs/ca/ca.crt -u "elastic":"elastic@docker"
 ```
@@ -104,7 +104,7 @@ Afficahge de l'état du Kibana:</br>
 curl https://kibana:5601/status -I --cacert /data/poc_elk/certs/ca/ca.crt
 ```
 > [!WARNING]
-> Si vous n'arrivez à utiliser les certificats ajoutez le groupe `root` a votre utilisateur
+> Si vous n'arrivez à utiliser les certificats ajoutez le groupe `root` à votre utilisateur
 
 ### Lancement de l'interface Kibana
 Dans un browser WEB:</br>
