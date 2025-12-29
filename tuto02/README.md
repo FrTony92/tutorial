@@ -67,6 +67,7 @@ cd ..
 Retour dans l'interface graphique.</br>
 Ouverture de l'interface Fleet Server</br>
 Burger menu (icone avec  3 lignes) => Management => Fleet</br>
+Onglet `Settings`</br>
 Partie Output, selectionnez la ligne "default" remplacer:</br>
 - `http://localhost:9200` par  `https://es01:9200`
 Ouvrir `Authentication`:  </br>
