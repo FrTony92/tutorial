@@ -54,8 +54,8 @@ mkdir certs
 curl -s -o .env https://raw.githubusercontent.com/FrTony92/tutorial/main/tuto01/001_stack.env
 ```
 Modification du fichier .env pour définir le mot de passe des utilisateur `elastic` et `kibana_system` ainsi que la version de la stack ELK qui va être utilisée :</br>
-ELASTIC_PASSWORD=[PASSWORD] par exemple elastic@docker</br>
-KIBANA_PASSWORD=[PASSWORD] par exemple kibana@docker</br>
+ELASTIC_PASSWORD=[PASSWORD] par exemple `elastic@docker`</br>
+KIBANA_PASSWORD=[PASSWORD] par exemple `kibana@docker`</br>
 STACK_VERSION=[VERSION], au moment de ce tuto 9.2.3</br>
 
 ### Modification des résolutions de noms (DNS)
