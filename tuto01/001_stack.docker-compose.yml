@@ -84,7 +84,7 @@ services:
     restart: always   # Will be restarted after reboot
     volumes:
       - ./certs:/usr/share/elasticsearch/config/certs  # Contain certificats created in the service setup
-      - esdata01:/usr/share/elasticsearch/data
+      - ./esdata01:/usr/share/elasticsearch/data
     ports:
       - ${ES_PORT}:9200
     environment:
@@ -131,7 +131,7 @@ services:
     restart: always   # Will be restarted after reboot
     volumes:
       - ./certs:/usr/share/elasticsearch/config/certs  # Contain certificats created in the service setup
-      - esdata02:/usr/share/elasticsearch/data
+      - ./esdata02:/usr/share/elasticsearch/data
     environment:
       - node.name=es02
       - cluster.name=${CLUSTER_NAME}
@@ -176,7 +176,7 @@ services:
     restart: always   # Will be restarted after reboot
     volumes:
       - ./certs:/usr/share/elasticsearch/config/certs  # Contain certificats created in the service setup
-      - esdata03:/usr/share/elasticsearch/data
+      - ./esdata03:/usr/share/elasticsearch/data
     environment:
       - node.name=es03
       - cluster.name=${CLUSTER_NAME}
@@ -227,7 +227,7 @@ services:
     volumes:
       - ./certs:/usr/share/kibana/config/certs  # Contain certificats created in the service setup
       - ./kibana.yml:/usr/share/kibana/config/kibana.yml    # the configuation file is store outside the container to allow easy setup of specific customization
-      - kibanadata:/usr/share/kibana/data
+      - ./kibanadata:/usr/share/kibana/data
     ports:
       - ${KIBANA_PORT}:5601
     environment:
