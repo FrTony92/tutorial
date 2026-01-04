@@ -10,13 +10,6 @@ Les logiciels suivant doivent être installés:
 - GIT
 - Docker
 
-Le user utilisé doit appartenir aux groupes `root` et `docker`:
-```
-sudo usermod -aG root ${USER}
-```
-```
-sudo usermod -aG docker ${USER}
-```
 ***
 ## Déroulé et liste des commandes</br>
 ```
