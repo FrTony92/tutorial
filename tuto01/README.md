@@ -9,10 +9,16 @@ logiciels intallés:
 
 Le user utilisé doit appartenir aux groupes `root` et `docker`:
 ```
+id
+```
+Sinon:
+```
 sudo usermod -aG root ${USER}
+reboot
 ```
 ```
 sudo usermod -aG docker ${USER}
+reboot
 ```
 Faire ensuite logout puis login et vérifier avec le commande `id`.</br>
 
@@ -21,7 +27,7 @@ Voici la liste des commandes utilisées lors du tuto:</br>
 ```
 sudo sysctl -a | grep vm.max_map_count
 ```
-Passez les commandes suivantes si le résultat est inférieur à 200000 
+Passez les commandes suivantes si le résultat est inférieur à 260.000 
 ```
 sudo vi /etc/sysctl.conf
 ```
