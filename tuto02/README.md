@@ -138,4 +138,7 @@ curl --cacert /data/poc_elk/certs/ca/ca.crt  https://fleet_docker:8220/api/statu
 ***
 Retour dans Kibana, le Fleet Server doit être en statut Updating puis Healthy.</br>
 Vérifiez que la CPU et la mémoire ne sont pas en N/A.
+
+> [!WARNING]
+> Il semble qu'en version 9.2.3, un restart de l'interface Kibana se fait lors de l'intégration du Fleet.
 ***
