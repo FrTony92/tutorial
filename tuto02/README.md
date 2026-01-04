@@ -120,20 +120,14 @@ Retour dans le terminal
 curl -o docker-compose.yml -s https://raw.githubusercontent.com/FrTony92/tutorial/main/tuto02/002_fleet.docker-compose.yml
 ```
 ```
-cat docker-compose.yml
+vi docker-compose.yml
 ```
-
 Ouvrir le fichier docker-compose.yml et faire le remplacement suivant:</br>
 `[REPLACE_BY_FLEET_TOKEN_CREATED_BY_KIBANA]` par le TOKEN de l'écran de configuration.</br>
 ***
 Démarrez le Fleet Server:
 ```
 docker compose up -d fleet_docker
-```
-***
-Regardez la log du container:
-```
-docker compose logs fleet_docker -f
 ```
 ***
 Test du Fleet Server:
