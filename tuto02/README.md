@@ -133,5 +133,5 @@ Retour dans Kibana, le Fleet Server doit être en statut Updating puis Healthy.<
 Vérifiez que la CPU et la mémoire ne sont pas en N/A.
 
 > [!WARNING]
-> Il semble qu'en version 9.2.3, un restart de l'interface Kibana se fait lors de l'intégration du Fleet.
+> En version 9.2.x, un restart de l'interface Kibana se fait lors de l'intégration du Fleet.
 ***
