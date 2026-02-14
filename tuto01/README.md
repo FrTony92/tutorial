@@ -4,8 +4,17 @@
 Ce tutorial est réalisé sur une VM Linux Ubuntu Desktop 25.10 avec 8 Gb de RAM, 4 vCPU et 128 Gb de disque dur.</br>
 De préference, utilisez une IP fixe.</br>
 
-logiciels intallés:
+logiciels intallés:</br>
+- GIT
 - Docker
+
+Objectif de ce tuto:</br>
+- Préparer une VMpour installer un cluster 3 noeuds ElasticSearch en docker,
+- Installer le cluster avec un Kibana en mode HTTPS,
+- Démarrer et vérifier le cluster.
+
+***
+## Déroulé et liste des commandes</br>
 
 Le user utilisé doit appartenir aux groupes `root` et `docker`:
 ```
