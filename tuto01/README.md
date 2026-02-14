@@ -4,7 +4,7 @@
 Ce tutorial est réalisé sur une VM Linux Ubuntu Desktop 25.10 avec 8 Gb de RAM, 4 vCPU et 128 Gb de disque dur.</br>
 De préference, utilisez une IP fixe.</br>
 
-logiciels intallés:</br>
+Les logiciels suivant doivent être installés:</br>
 - GIT
 - Docker
 
