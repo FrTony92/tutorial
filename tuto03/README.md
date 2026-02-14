@@ -14,6 +14,7 @@ Les logiciels suivant doivent être installés:
 - Docker
 
 Objectifs de ce tuto:</br>
+- Enregistrer le certificat auto-signé ElasticSearch sur un système Debian ou RedHat,
 - Installer un elastic-agent sur la VM où est installé le cluster ElasticSearch en docker,
 - Démarrer un elastic-agent en mode docker.
 
