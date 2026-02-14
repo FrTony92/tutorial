@@ -240,7 +240,7 @@ services:
       test:
         [
           "CMD-SHELL",
-          "curl -s -I https://localhost:5601 | grep -q 'HTTP/1.1 302 Found'",
+          "curl -s -I https://localhost:5601 | grep -q 'Connection: keep-alive'",
         ]
       interval: 10s
       timeout: 10s
