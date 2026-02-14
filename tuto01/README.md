@@ -1,4 +1,4 @@
-# Tutorial n°1 : Installation d'une stack Docker
+# Tutorial n°1 : Installation d'un cluster ElasticSearch en Docker
 ***
 
 Ce tutorial est réalisé sur une VM Linux Ubuntu Desktop 25.10 avec 8 Gb de RAM, 4 vCPU et 128 Gb de disque dur.</br>
@@ -9,7 +9,7 @@ Les logiciels suivant doivent être installés:</br>
 - Docker
 
 Objectif de ce tuto:</br>
-- Préparer une VMpour installer un cluster 3 noeuds ElasticSearch en docker,
+- Préparer une VM pour installer un cluster 3 noeuds ElasticSearch sous docker,
 - Installer le cluster avec un Kibana en mode HTTPS,
 - Démarrer et vérifier le cluster.
 
