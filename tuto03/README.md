@@ -63,6 +63,8 @@ Passez au point 3 => `Install Elastic Agent on your host`</br>
 Dans les types d'OS proposé, choisir `Linux_x86_64` si votre serveur est de type Ubuntu (debian) ou Redhat.</br>
 Notez les commandes fournies et, notamment, le Token d'enrollement sur la ligne d'installation.</br>
 
+### Installation d'un elastic-agent sur la VM poc_elk
+
 Ouvrir une fenêtre et passer les commandes suivantes:
 ```
 cd /data
@@ -81,3 +83,21 @@ rm -rf /data/elastic-agent-*
 ```
 
 Dans la policy `Agent_Policy` à la place de `Add agent` vous devez avoir `1 agent`.</br>
+
+### Installation d'un elastic-agent en mode docker
+
+Si vous avez suivi les premiers tutos, executez les commandes suivantes:</br>
+```
+cd /data/poc_elk
+```
+```
+curl -o fleet_docker.yml -s https://raw.githubusercontent.com/FrTony92/tutorial/main/tuto03/003_fleet.fleet_docker.yml
+```
+
+Ouvrir le fichier, cherchez er remplacer `[ENROLLEMENT_TOKEN]` par l'enrollement token de la policy `Agent_Policy`.</br>
+Lancer l'agent docker:</br>
+```
+docker compose up -d agent_docker
+```
+
+
