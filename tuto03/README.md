@@ -13,6 +13,10 @@ Les logiciels suivant doivent être installés:
 - GIT
 - Docker
 
+Objectifs de ce tuto:</br>
+- Installer un elastic-agent sur la VM où est installé le cluster ElasticSearch en docker,
+- Démarrer un elastic-agent en mode docker.
+
 ***
 ## Déroulé et liste des commandes</br>
 ### Vérification des prérequis
