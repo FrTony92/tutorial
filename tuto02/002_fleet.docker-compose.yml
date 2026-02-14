@@ -274,6 +274,16 @@ services:
       - FLEET_SERVER_PORT=8220
       - ELASTICSEARCH_HOST=https://es01:9200
       - FLEET_ENROLL=1
+      - ELASTIC_AGENT_TAGS=elk
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -s --cacert /certs/ca/ca.crt https://localhost:8220/api/status | grep -q 'HEALTHY'",
+        ]
+      interval: 10s
+      timeout: 10s
+      retries: 120
 
 volumes:
   certs:
