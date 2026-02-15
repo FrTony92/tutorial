@@ -21,9 +21,6 @@ Objectif de ce tuto:</br>
 ***
 ## Déroulé et liste des commandes</br>
 ```
-ip a | grep inet    # Pour retrouver l'IP de notre serveur
-```
-```
 sudo vi /etc/hosts      # Ajouter fleet_docker
 ```
 ```
