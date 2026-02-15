@@ -42,6 +42,9 @@ ls -alh
 curl -o fleet_docker.yml -s https://raw.githubusercontent.com/FrTony92/tutorial/main/tuto02/002_fleet.fleet_docker.yml
 ```
 ```
+cat /etc/hosts
+```
+```
 vi fleet_docker.yml             # Ajouter l'IP du serveur
 ```
 ```
