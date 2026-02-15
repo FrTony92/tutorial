@@ -67,6 +67,7 @@ services:
         until curl -s -X POST --cacert config/certs/ca/ca.crt -u "elastic:${ELASTIC_PASSWORD}" -H "Content-Type: application/json" https://es01:9200/_security/user/kibana_system/_password -d "{\"password\":\"${KIBANA_PASSWORD}\"}" | grep -q "^{}"; do sleep 10; done;
         echo "All done!";
       '
+    # Check that cerfticats are available.
     healthcheck:
       test: ["CMD-SHELL", "[ -f config/certs/es01/es01.crt ]"]
       interval: 1s
@@ -111,6 +112,7 @@ services:
       memlock:
         soft: -1
         hard: -1
+    # Check that first node of the ELK cluster is started
     healthcheck:
       test:
         [
@@ -156,6 +158,7 @@ services:
       memlock:
         soft: -1
         hard: -1
+    # Check that node of the ELK cluster is started
     healthcheck:
       test:
         [
@@ -201,6 +204,7 @@ services:
       memlock:
         soft: -1
         hard: -1
+    # Check that node of the ELK cluster is started
     healthcheck:
       test:
         [
@@ -235,17 +239,18 @@ services:
       - ELASTICSEARCH_HOSTS=https://es01:9200
       - ELASTICSEARCH_USERNAME=kibana_system
       - ELASTICSEARCH_PASSWORD=${KIBANA_PASSWORD}
-      - ELASTICSEARCH_SSL_CERTIFICATEAUTHORITIES=config/certs/ca/ca.crt
     mem_limit: ${MEM_LIMIT}
+    # Check that Kibana is ready to accept connections
     healthcheck:
       test:
         [
           "CMD-SHELL",
-          "curl -s --cacert config/certs/ca/ca.crt -I https://localhost:5601 | grep -q 'Connection: keep-alive'",
+          "curl -s -I https://localhost:5601 | grep -q 'x-content-type-options: nosniff'",
         ]
       interval: 10s
       timeout: 10s
       retries: 120
+
   ###########################################################################
   # Start a Fleet server based on the elastic-agent complete version
   ###########################################################################
@@ -274,7 +279,8 @@ services:
       - FLEET_SERVER_PORT=8220
       - ELASTICSEARCH_HOST=https://es01:9200
       - FLEET_ENROLL=1
-      - ELASTIC_AGENT_TAGS=elk
+      - ELASTIC_AGENT_TAGS=elk    # Add a tag in the Fleet screen for this elastic-agent
+    # Check that Fleet_server is ready to accept connections
     healthcheck:
       test:
         [
