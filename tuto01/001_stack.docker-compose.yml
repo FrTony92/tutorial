@@ -68,6 +68,7 @@ services:
         echo "All done!";
       '
     healthcheck:
+      # Check that cerfticats are available.
       test: ["CMD-SHELL", "[ -f config/certs/es01/es01.crt ]"]
       interval: 1s
       timeout: 5s
@@ -112,7 +113,7 @@ services:
         soft: -1
         hard: -1
     healthcheck:
-      test:
+      # Check that one of the ELK cluster nodes is started
         [
           "CMD-SHELL",
           "curl -s --cacert config/certs/ca/ca.crt https://localhost:9200 | grep -q 'missing authentication credentials'",
@@ -157,6 +158,7 @@ services:
         soft: -1
         hard: -1
     healthcheck:
+      # Same check than for es01
       test:
         [
           "CMD-SHELL",
@@ -202,6 +204,7 @@ services:
         soft: -1
         hard: -1
     healthcheck:
+      # Same check than for es01
       test:
         [
           "CMD-SHELL",
@@ -237,6 +240,7 @@ services:
       - ELASTICSEARCH_PASSWORD=${KIBANA_PASSWORD}
     mem_limit: ${MEM_LIMIT}
     healthcheck:
+      # Same that Kibana is ready to accept connections
       test:
         [
           "CMD-SHELL",
