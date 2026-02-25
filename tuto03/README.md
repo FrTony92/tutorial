@@ -96,7 +96,7 @@ Si vous avez suivi les premiers tutos, executez les commandes suivantes:</br>
 cd /data/poc_elk
 ```
 ```
-curl -o fleet_docker.yml -s https://raw.githubusercontent.com/FrTony92/tutorial/main/tuto03/003_fleet.fleet_docker.yml
+curl -o docker-compose.yml -s https://raw.githubusercontent.com/FrTony92/tutorial/main/tuto03/003_docker-compose.yml
 ```
 
 Ouvrir le fichier, cherchez er remplacer `[ENROLLEMENT_TOKEN]` par l'enrollement token de la policy `Agent_Policy`.</br>
