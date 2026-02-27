@@ -99,7 +99,7 @@ cd /data/poc_elk
 curl -o docker-compose.yml -s https://raw.githubusercontent.com/FrTony92/tutorial/main/tuto03/003_docker-compose.yml
 ```
 
-Ouvrir le fichier, cherchez er remplacer `[ENROLLEMENT_TOKEN]` par l'enrollement token de la policy `Agent_Policy`.</br>
+Ouvrir le fichier, cherchez er remplacer `[REPLACE_ENROLLEMENT_TOKEN]` par l'enrollement token de la policy `Agent_Policy`.</br>
 Lancer l'agent docker:</br>
 ```
 docker compose up -d agent_docker
