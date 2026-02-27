@@ -13,7 +13,10 @@ Les logiciels suivant doivent être installés:
 ## Activation de la surveillance de la stack
 Ouvrir la policy "POC_Fleet".
 Ajouter l'integration `Elasticsearch`:</br>
-- Nom: `elasticsearch-elk_poc`</br>
+- Nom:</br>
+  ```
+  elasticsearch-elk_poc
+  ```
 Dans la partie "Metrics (Stack Monitoring)":</br>
   - Settings
     - Hosts:
