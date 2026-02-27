@@ -297,7 +297,7 @@ services:
     environment:
       - CERTIFICATE_AUTHORITIES=/certs/ca/ca.crt
       - ELASTICSEARCH_CA=/certs/ca/ca.crt
-      - FLEET_ENROLLMENT_TOKEN=[ENROLLEMENT_TOKEN]
+      - FLEET_ENROLLMENT_TOKEN=[REPLACE_ENROLLEMENT_TOKEN]
       - FLEET_ENROLL=1
       - FLEET_URL=https://fleet_docker:8220
       - ELASTIC_AGENT_TAGS=agent
