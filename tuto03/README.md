@@ -51,6 +51,13 @@ update-ca-trust
 sudo trust list | grep label | grep Elastic
 ```
 
+Pour un serveur Windows en PowerShell :
+```
+Get-ChildItem -Path Cert:\LocalMachine\Root | Where-Object { $_.Subject -match "mononode" }
+$file = Get-ChildItem -Path "C:\Users\Administrator\Documents\ca_mononode.crt"
+$file | Import-Certificate -CertStoreLocation Cert:\LocalMachine\Root
+Get-ChildItem -Path Cert:\LocalMachine\Root | Where-Object { $_.Subject -match "mononode" }
+```
 ### Ajout d'une politique agent
 
 Se connecter à Kibana: https://kibana:5601</br>
