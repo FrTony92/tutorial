@@ -19,10 +19,16 @@ Vérification du system:
 ```bash
 cat /etc/os-release
 ```
-Le user utilisé doit appartenir aux groupes `root` et `docker`:
+```bash
+free -h
+```
+```bash
+lscpu
+```
 ```bash
 id
 ```
+Le user utilisé doit appartenir aux groupes `root` et `docker`:
 Sinon:
 ```bash
 sudo usermod -aG root ${USER}
