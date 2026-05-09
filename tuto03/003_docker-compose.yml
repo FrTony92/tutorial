@@ -81,7 +81,7 @@ services:
       setup:
         condition: service_healthy
     image: docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
-    restart: always   # Will be restarted after reboot
+    restart: unless-stopped   # Will be restarted after reboot if not stop before
     volumes:
       - ./certs:/usr/share/elasticsearch/config/certs  # Contain certificats created in the service setup
       - esdata01:/usr/share/elasticsearch/data
@@ -128,7 +128,7 @@ services:
     depends_on:
       - es01
     image: docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
-    restart: always   # Will be restarted after reboot
+    restart: unless-stopped   # Will be restarted after reboot if not stop before
     volumes:
       - ./certs:/usr/share/elasticsearch/config/certs  # Contain certificats created in the service setup
       - esdata02:/usr/share/elasticsearch/data
@@ -173,7 +173,7 @@ services:
     depends_on:
       - es02
     image: docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
-    restart: always   # Will be restarted after reboot
+    restart: unless-stopped   # Will be restarted after reboot if not stop before
     volumes:
       - ./certs:/usr/share/elasticsearch/config/certs  # Contain certificats created in the service setup
       - esdata03:/usr/share/elasticsearch/data
@@ -223,7 +223,7 @@ services:
       es03:
         condition: service_healthy
     image: docker.elastic.co/kibana/kibana:${STACK_VERSION}
-    restart: always   # Will be restarted after reboot
+    restart: unless-stopped   # Will be restarted after reboot if not stop before
     volumes:
       - ./certs:/usr/share/kibana/config/certs  # Contain certificats created in the service setup
       - ./kibana.yml:/usr/share/kibana/config/kibana.yml    # the configuation file is store outside the container to allow easy setup of specific customization
@@ -254,7 +254,7 @@ services:
       - kibana
     hostname: fleet_docker
     image: docker.elastic.co/elastic-agent/elastic-agent:${STACK_VERSION}
-    restart: always   # Will be restarted after reboot
+    restart: unless-stopped   # Will be restarted after reboot if not stop before
     volumes:
       - ./certs:/certs
       - ./fleet:/usr/share/elastic-agent/state
@@ -290,7 +290,7 @@ services:
   agent_docker:
     hostname: agent_docker
     image: docker.elastic.co/elastic-agent/elastic-agent:${STACK_VERSION}
-    restart: always
+    restart: unless-stopped   # Will be restarted after reboot if not stop before
     volumes:
       - ./certs:/certs
     user: root
