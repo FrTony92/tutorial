@@ -20,49 +20,49 @@ Objectif de ce tuto:</br>
 
 ***
 ## Déroulé et liste des commandes</br>
-```
+```bash
 sudo vi /etc/hosts      # Ajouter fleet_docker
 ```
-```
+```bash
 cd /data/poc_elk
 ```
-```
+```bash
 sudo chown -R ${USER} /data/poc_elk
 ```
-```
+```bash
 docker compose ps
 ```
-```
+```bash
 cd certs
 ```
-```
+```bash
 ls -alh
 ```
-```
+```bash
 curl -o fleet_docker.yml -s https://raw.githubusercontent.com/FrTony92/tutorial/main/tuto02/002_fleet.fleet_docker.yml
 ```
-```
+```bash
 cat /etc/hosts
 ```
-```
+```bash
 vi fleet_docker.yml             # Ajouter l'IP du serveur
 ```
-```
+```bash
 docker exec -it poc-es01-1 bash
 ```
-```
+```bash
 bin/elasticsearch-certutil cert --silent --pem -out config/certs/fleet_docker.zip --in config/certs/fleet_docker.yml --ca-cert config/certs/ca/ca.crt --ca-key config/certs/ca/ca.key
 ```
-```
+```bash
 exit
 ```
-```
+```bash
 ls -alh
 ```
-```
+```bash
 unzip fleet_docker.zip
 ```
-```
+```bash
 cd ..
 ```
 Retour dans l'interface graphique.</br>
@@ -70,10 +70,14 @@ Ouverture de l'interface Fleet Server</br>
 Burger menu (icone avec  3 lignes) => Management => Fleet</br>
 Onglet `Settings`</br>
 Partie Output, selectionnez la ligne "default" remplacer:</br>
-- `http://localhost:9200` par  `https://es01:9200`
+```bash
+http://localhost:9200
+# par
+https://es01:9200
+```
 Ouvrir `Authentication`:  </br>
 `Server SSL certificate authorities` mettre le contenu de : 
-```
+```bash
 cat /data/poc_elk/certs/ca/ca.crt
 ```
 
@@ -98,15 +102,15 @@ URL: `https://fleet_docker:8220`</br>
 Authentication:  </br>
 Copiez les certificates:
 - `Fleet Server > Elastic Agents certificate authorities`: 
-```
+```bash
 cat /data/poc_elk/certs/ca/ca.crt
 ```
 - `Fleet Server > SSL server certificate`:
-```
+```bash
 cat /data/poc_elk/certs/fleet_docker/fleet_docker.crt
 ```
 - `Fleet Server > SSL server private key`:
-```
+```bash
 cat /data/poc_elk/certs/fleet_docker/fleet_docker.key
 ```
 Choisir pour `Client auth`, `Required`</br>
@@ -118,22 +122,22 @@ Garder le TOKEN à l'écran.</br>
 ***
 
 Retour dans le terminal
-```
+```bash
 curl -o docker-compose.yml -s https://raw.githubusercontent.com/FrTony92/tutorial/main/tuto02/002_fleet.docker-compose.yml
 ```
-```
+```bash
 vi docker-compose.yml
 ```
 Ouvrir le fichier docker-compose.yml et faire le remplacement suivant:</br>
 `[REPLACE_BY_FLEET_TOKEN_CREATED_BY_KIBANA]` par le TOKEN de l'écran de configuration.</br>
 ***
 Démarrez le Fleet Server:
-```
+```bash
 docker compose up -d fleet_docker
 ```
 ***
 Test du Fleet Server:
-```
+```bash
 curl --cacert /data/poc_elk/certs/ca/ca.crt  https://fleet_docker:8220/api/status
 ```
 ***
