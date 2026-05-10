@@ -72,7 +72,9 @@ Onglet `Settings`</br>
 Partie Output, selectionnez la ligne "default" remplacer:</br>
 ```bash
 http://localhost:9200
-# par
+```
+par
+```bash
 https://es01:9200
 ```
 Ouvrir `Authentication`:  </br>
