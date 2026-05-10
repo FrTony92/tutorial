@@ -1,7 +1,7 @@
 # Tutorial n°2 : Création d'un Fleet Server sous Docker
 ***
 ## Préambule
-Ce tutoriel suit le tuto 1: [01- Installation Stack Elasticsearch Docker](https://youtu.be/TWMNc9QjoJw)
+Ce tutoriel suit le tuto 1: [01- Installation Stack Elasticsearch Docker](https://youtu.be/Jpk5XBElLVQ?si=eOYjzIUBvO0b1NsS)
 
 ***
 Ce tutorial est réalisé sur une VM Linux Ubuntu Desktop avec 8 Gb de RAM, 4 vCPU et 128 Gb de disque dur.</br>
