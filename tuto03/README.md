@@ -47,7 +47,7 @@ Pour un serveur Redhat (type .rpm) :
 ```
 sudo trust list | grep label | grep Elastic
 sudo cp /data/poc_elk/certs/ca/ca.crt /etc/pki/ca-trust/source/anchors/
-update-ca-trust
+sudo update-ca-trust
 sudo trust list | grep label | grep Elastic
 ```
 
