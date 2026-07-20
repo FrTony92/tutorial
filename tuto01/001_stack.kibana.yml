@@ -15,4 +15,6 @@ server.ssl.key: config/certs/kibana/kibana.key
 # Mandatory to setup a fleet server
 xpack.encryptedSavedObjects:
   encryptionKey: "cle-de-32-bytes-minimum-pour-le-chiffrage"
+#----------------- Preconfigured alert history Elasticsearch index connector ----------------
+xpack.actions.preconfiguredAlertHistoryEsIndex: true
 #--------------------------------------- End ------------------------------------------------
